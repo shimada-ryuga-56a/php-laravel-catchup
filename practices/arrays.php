@@ -7,3 +7,14 @@ foreach ($colors as $color) {
 }
 
 echo "\n";
+
+$person = [
+  'name' => 'Taro',
+  'age' => 30,
+  'city' => 'Tokyo'
+];
+
+echo "=== Person ===\n";
+foreach ($person as $key => $value) {
+  echo "{$key}: {$value}\n";
+}
