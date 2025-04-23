@@ -29,7 +29,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request-> validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+
+        $post = Post::create($validated);
+
+        session()->flash("success", "投稿が作成されました。");
+
+        return redirect()->route('posts.index');
     }
 
     /**
