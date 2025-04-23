@@ -6,6 +6,14 @@
     <title>投稿詳細</title>
   </head>
   <body>
-    <h1>投稿詳細</h1>
+    <h1>
+      {{ $post->title }}
+    </h1>
+    <p>
+      {{ $post->content }}
+    </p>
+    <p>
+      <a href="{{route('posts.index')}}">&laquo; 一覧に戻る</a>
+    </p>
   </body>
 </html>
