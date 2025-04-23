@@ -7,6 +7,11 @@
   </head>
   <body>
     <h1>投稿一覧</h1>
+    @if (session('success'))
+      <div style="color: green;">
+        {{(session('success'))}}
+      </div>
+    @endif
     <ul>
       @forelse ($posts as $post)
         <li>
