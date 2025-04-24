@@ -55,7 +55,6 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        Log::debug($post);
         return view('posts.edit', compact('post'));
     }
 
