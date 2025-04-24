@@ -78,8 +78,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        session()->flash('success', '投稿を削除しました。');
+        return redirect()->route('posts.index');
     }
 }
