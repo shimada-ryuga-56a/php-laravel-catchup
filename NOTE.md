@@ -35,3 +35,11 @@
 session()->flash('success', '投稿が作成されました。');
 ```
 上記のようにすることで、次のリクエストまでしか保持されない、フラッシュデータを設定することができる。`session('key')`、今回は`session('success')`で呼び出しができる。
+
+# 【マイグレーションファイルの書き方】
+## 子モデルの書き方
+```
+$table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+```
+* `constrained('posts')`はどのモデルの子要素かを指定する。
+* `onDelete('cascade')`は親要素が削除された際に連鎖的に削除する。
