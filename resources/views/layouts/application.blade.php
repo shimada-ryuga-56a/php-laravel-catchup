@@ -6,6 +6,7 @@
     <title>Laravel App</title>
   </head>
   <body>
+    @include('partials.flash')
     @yield('content')
   </body>
 </html>
