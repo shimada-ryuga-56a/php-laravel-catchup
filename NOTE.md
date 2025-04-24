@@ -9,6 +9,10 @@
   `php artisan make:controller XxxController --resource`
 * モデル作成
   `php artisan make:model Xxx`
+  オプションは下記の通り。
+  * `-m`：マイグレーションファイルも生成。
+  * `-c`：コントローラファイルも生成。
+  * `-r`：生成するコントローラに`resources`を含める。
 
 # 【Laravelにおけるパーシャルの扱い方】
 * `@yield`：親ビュー内で用いる。**子ビューが特定の名前の`section`名を定義していたら、**親ビューに挿入する。
