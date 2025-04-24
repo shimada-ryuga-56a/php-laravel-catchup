@@ -17,4 +17,20 @@
   <button type="submit">削除する</button>
 </form>
 
+<h2>コメント</h2>
+<ul>
+  @forelse($post->comments as $comment)
+  <li>
+    {{$comment->body}}
+    <small>
+      {{$comment->created_at->format('Y-m-d H:i')}}
+    </small>
+  </li>
+  @empty
+  <li>
+    まだコメントはありません。
+  </li>
+  @endforelse
+</ul>
+
 @endsection
