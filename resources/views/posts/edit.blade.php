@@ -19,6 +19,16 @@
   <form action="{{route('posts.update', $post)}}" method="POST">
     @csrf
     @method('PUT')
+    <div>
+      <label for="title">タイトル</label>
+      <input type="text" name="title" value="{{old('title', $post->title)}}">
+    </div>
+    <div>
+      <label for="content">本文</label>
+      <textarea name="content">
+        {{old('content', $post->content)}}
+      </textarea>
+    </div>
     <button type="submit">
       更新する
     </button>
