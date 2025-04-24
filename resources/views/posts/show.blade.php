@@ -33,4 +33,22 @@
   @endforelse
 </ul>
 
+<h3>
+  コメントを追加
+</h3>
+@if ($errors->has('body'))
+  <div style="color:red";>
+    {{$errors->first('body')}}
+  </div>
+@endif
+
+<form action="{{route('posts.comments.store', $post)}}" method="POST">
+  @csrf
+  <textarea name="body" row="3">
+    {{old('body')}}
+  </textarea>
+  <br>
+  <button type="submit">投稿する</button>
+</form>
+
 @endsection
