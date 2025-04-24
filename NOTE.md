@@ -1,14 +1,29 @@
 # 【コマンド関係】
-## 🍠アプリ内
+## 🍠Laravel関連
 * サーバー立ち上げ
   `php artisan serve`
-## Laravel全般
+* tinkerでの操作開始
+  `php artisan tinker`
+## 🍠MVC関連
 * ルーティング確認
   `php artisan route:list`
 * コントローラ作成
-  `php artisan make:controller XxxController --resource`
+  `php artisan make:controller XxxController`
+  オプションは下記の通り。
+  * `--resource`：リソースを自動設定。
 * モデル作成
   `php artisan make:model Xxx`
+  オプションは下記の通り。
+  * `-m`：マイグレーションファイルも生成。
+  * `-c`：コントローラファイルも生成。
+  * `-mc`：マイグレーションファイルとコントローラファイルの同時生成。
+  * `-r`：生成するコントローラに`resources`を含める。
+* マイグレーション関連
+  * テーブル作成
+    `php artisan make:migration create_xxx_table --create=xxxs`
+    ⚠️中間テーブルは複数形にしない！
+  * 既存のテーブル構造変更（例はカラム追加）
+    `php artisan make:migration add_column_to_ssss_table --table=xxxs`
 
 # 【Laravelにおけるパーシャルの扱い方】
 * `@yield`：親ビュー内で用いる。**子ビューが特定の名前の`section`名を定義していたら、**親ビューに挿入する。
@@ -30,3 +45,11 @@
 session()->flash('success', '投稿が作成されました。');
 ```
 上記のようにすることで、次のリクエストまでしか保持されない、フラッシュデータを設定することができる。`session('key')`、今回は`session('success')`で呼び出しができる。
+
+# 【マイグレーションファイルの書き方】
+## 子モデルの書き方
+```
+$table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+```
+* `constrained('posts')`はどのモデルの子要素かを指定する。
+* `onDelete('cascade')`は親要素が削除された際に連鎖的に削除する。
