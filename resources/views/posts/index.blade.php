@@ -15,3 +15,5 @@
     </li>
   @endforelse
 </ul>
+
+@endsection
