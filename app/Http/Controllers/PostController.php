@@ -61,9 +61,18 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $validated = $request-> validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+
+        $post->update($validated);
+
+        session()->flash('success', '投稿を更新しました。');
+
+        return redirect()->route('posts.show', $post);
     }
 
     /**
