@@ -8,7 +8,9 @@
 * ルーティング確認
   `php artisan route:list`
 * コントローラ作成
-  `php artisan make:controller XxxController --resource`
+  `php artisan make:controller XxxController`
+  オプションは下記の通り。
+  * `--resource`：リソースを自動設定。
 * モデル作成
   `php artisan make:model Xxx`
   オプションは下記の通り。
@@ -16,6 +18,12 @@
   * `-c`：コントローラファイルも生成。
   * `-mc`：マイグレーションファイルとコントローラファイルの同時生成。
   * `-r`：生成するコントローラに`resources`を含める。
+* マイグレーション関連
+  * テーブル作成
+    `php artisan make:migration create_xxx_table --create=xxxs`
+    ⚠️中間テーブルは複数形にしない！
+  * 既存のテーブル構造変更（例はカラム追加）
+    `php artisan make:migration add_column_to_ssss_table --table=xxxs`
 
 # 【Laravelにおけるパーシャルの扱い方】
 * `@yield`：親ビュー内で用いる。**子ビューが特定の名前の`section`名を定義していたら、**親ビューに挿入する。
