@@ -51,9 +51,9 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Comment $comment)
+    public function edit(Post $post, Comment $comment)
     {
-        //
+        return view('comments.edit', compact('post', 'comment'));
     }
 
     /**
