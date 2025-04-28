@@ -7,6 +7,7 @@
     @forelse ($tags as $tag)
       <li>
         {{$tag->name}}
+        <a href="{{route('tags.edit', $tag)}}"><button>編集</button></a>
       </li>
     @empty
       <li>まだタグがありません</li>
