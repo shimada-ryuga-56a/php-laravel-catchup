@@ -74,6 +74,9 @@ public function store(Request $request)
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        session()->flash('success', 'タグを削除しました。');
+        return redirect()->route('tags.index');
     }
 }
