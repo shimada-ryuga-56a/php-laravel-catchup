@@ -8,6 +8,10 @@
       <li>
         {{$tag->name}}
         <a href="{{route('tags.edit', $tag)}}"><button>編集</button></a>
+        <form action="{{route('tags.destroy', [$tag])}}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+          @csrf @method('DELETE')
+          <button>削除</button>
+        </form>
       </li>
     @empty
       <li>まだタグがありません</li>
