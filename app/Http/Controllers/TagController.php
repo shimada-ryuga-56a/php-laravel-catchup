@@ -60,7 +60,7 @@ public function store(Request $request)
     public function update(Request $request, Tag $tag)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:tags,name|max:50',
+            'name' => 'required|unique:tags,name,'.$tag->id.'|max:50',
         ]);
 
         $tag->update($validated);
