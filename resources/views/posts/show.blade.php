@@ -26,6 +26,10 @@
       {{$comment->created_at->format('Y-m-d H:i')}}
     </small>
     <button><a href="{{route('posts.comments.edit', [$post, $comment])}}">編集する</a></button>
+    <form action="{{route('posts.comments.destroy', [$post, $comment])}}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+      @csrf @method('DELETE')
+      <button>削除する</button>
+    </form>
   </li>
   @empty
   <li>
