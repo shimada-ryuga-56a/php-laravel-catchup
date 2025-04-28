@@ -59,9 +59,16 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Post $post, Comment $comment)
     {
-        //
+        $validated = $request->validate([
+            'body' => 'required',
+        ]);
+
+        $comment->update($validated);
+
+        session()->flash('success', 'コメントを更新しました');
+        return redirect()->route('posts.show', $post);
     }
 
     /**
