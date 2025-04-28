@@ -59,7 +59,14 @@ public function store(Request $request)
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:tags,name|max:50',
+        ]);
+
+        $tag->update($validated);
+
+        session()->flash('success', 'タグを更新しました。');
+        return redirect()->route('tags.index');
     }
 
     /**
