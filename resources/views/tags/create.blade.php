@@ -13,4 +13,13 @@
       </ul>
     </div>
   @endif
+
+  <form action="{{route('tags.store')}}" method="POST">
+    @csrf
+    <div>
+      <label for="name">タグ名：</label>
+      <input type="text" name="name" value="{{old('name')}}"></input>
+      <button type="submit">作成</button>
+    </div>
+  </form>
 @endsection
