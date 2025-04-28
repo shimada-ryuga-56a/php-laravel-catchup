@@ -13,9 +13,7 @@
   <form action="{{route('posts.comments.update', [$post, $comment])}}" method="POST">
     @csrf
     @method("PUT")
-    <textarea name="body">
-      {{old('body', $comment->body)}}
-    </textarea>
+    <textarea name="body">{{old('body', $comment->body)}}</textarea>
     <br>
     <button type="submit">
       更新する

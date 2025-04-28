@@ -25,9 +25,7 @@
     </div>
     <div>
       <label for="content">本文</label>
-      <textarea name="content">
-        {{old('content', $post->content)}}
-      </textarea>
+      <textarea name="content">{{old('content', $post->content)}}</textarea>
     </div>
     <button type="submit">
       更新する

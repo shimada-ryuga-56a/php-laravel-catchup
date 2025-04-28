@@ -44,9 +44,7 @@
 
 <form action="{{route('posts.comments.store', $post)}}" method="POST">
   @csrf
-  <textarea name="body" row="3">
-    {{old('body')}}
-  </textarea>
+  <textarea name="body" row="3">{{old('body')}}</textarea>
   <br>
   <button type="submit">投稿する</button>
 </form>
