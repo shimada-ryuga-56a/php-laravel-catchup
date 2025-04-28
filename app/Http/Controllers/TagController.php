@@ -51,7 +51,7 @@ public function store(Request $request)
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tags.edit', compact('tag'));
     }
 
     /**
