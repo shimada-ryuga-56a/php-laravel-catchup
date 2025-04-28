@@ -25,6 +25,7 @@
     <small>
       {{$comment->created_at->format('Y-m-d H:i')}}
     </small>
+    <button><a href="{{route('posts.comments.edit', [$post, $comment])}}">編集する</a></button>
   </li>
   @empty
   <li>
