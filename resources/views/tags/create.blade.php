@@ -22,4 +22,6 @@
       <button type="submit">作成</button>
     </div>
   </form>
+
+  <p><a href="{{ route('tags.index') }}">&laquo; 一覧に戻る</a></p>
 @endsection
