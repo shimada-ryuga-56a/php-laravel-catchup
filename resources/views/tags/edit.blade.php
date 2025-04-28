@@ -9,4 +9,11 @@
       </li>
     @endforeach
   </ul>
+
+  <form action="{{route('tags.update', $tag)}}" method="POST">
+    @csrf @method('PUT')
+    <label for="name">タグ名：</label>
+    <input type="text" name="name" value="{{old('tag', $tag->name)}}"></input>
+    <button type="submit">更新</button>
+  </form>
 @endsection
