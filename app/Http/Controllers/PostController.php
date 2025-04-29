@@ -35,9 +35,13 @@ class PostController extends Controller
         $validated = $request-> validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'tags'    => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $post = Post::create($validated);
+
+        $post->tags()->attach($request->input('tags', []));
 
         session()->flash("success", "投稿が作成されました。");
 
