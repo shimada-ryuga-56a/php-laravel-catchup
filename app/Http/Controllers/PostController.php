@@ -73,9 +73,12 @@ class PostController extends Controller
         $validated = $request-> validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $post->update($validated);
+        $post->tags()->sync($request->input('tags', []));
 
         session()->flash('success', '投稿を更新しました。');
 
