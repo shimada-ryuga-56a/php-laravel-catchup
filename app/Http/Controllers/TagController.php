@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\TagRequest;
 
 class TagController extends Controller
 {
+    private Tag $tag;
+
+    public function __construct()
+    {
+        $this->tag = new Tag();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,16 +35,13 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'name' => 'required|unique:tags,name|max:50',
-    ]);
+    public function store(TagRequest $request)
+    {
+        $registerTag = $this->tag->InsertTag($request);
 
-    Tag::create($validated);
-    session()->flash('success', 'タグを作成しました。');
-    return redirect()->route('tags.index');
-}
+        session()->flash('success', 'タグを作成しました。');
+        return redirect()->route('tags.index');
+    }
 
     /**
      * Display the specified resource.
