@@ -37,7 +37,7 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $registerTag = $this->tag->InsertTag($request);
+        Tag::create($request->validated());
 
         session()->flash('success', 'タグを作成しました。');
         return redirect()->route('tags.index');
@@ -62,13 +62,9 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:tags,name,'.$tag->id.'|max:50',
-        ]);
-
-        $tag->update($validated);
+        $tag->update($request->validated());
 
         session()->flash('success', 'タグを更新しました。');
         return redirect()->route('tags.index');
