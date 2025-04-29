@@ -2,13 +2,7 @@
 @section('title', 'タグ編集')
 @section('content')
   <h1>タグ編集</h1>
-  <ul>
-    @foreach ($errors->all() as $error)
-      <li>
-        {{$error}}
-      </li>
-    @endforeach
-  </ul>
+  @include("partials.errors")
 
   <form action="{{route('tags.update', $tag)}}" method="POST">
     @csrf @method('PUT')

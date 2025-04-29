@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -30,17 +32,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request-> validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'tags'    => 'array',
-            'tags.*' => 'exists:tags,id',
-        ]);
-
-        $post = Post::create($validated);
-
+        $post = Post::create($request->validated());
         $post->tags()->attach($request->input('tags', []));
 
         session()->flash("success", "投稿が作成されました。");
@@ -68,16 +62,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $validated = $request-> validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'tags' => 'array',
-            'tags.*' => 'exists:tags,id',
-        ]);
-
-        $post->update($validated);
+        $post->update($request->validated());
         $post->tags()->sync($request->input('tags', []));
 
         session()->flash('success', '投稿を更新しました。');
