@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -22,7 +23,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        return view('posts.create', compact("tags"));
     }
 
     /**
@@ -33,9 +35,13 @@ class PostController extends Controller
         $validated = $request-> validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'tags'    => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $post = Post::create($validated);
+
+        $post->tags()->attach($request->input('tags', []));
 
         session()->flash("success", "投稿が作成されました。");
 
@@ -55,7 +61,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $tags = Tag::all();
+        return view('posts.edit', compact('post', 'tags'));
     }
 
     /**
@@ -66,9 +73,12 @@ class PostController extends Controller
         $validated = $request-> validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $post->update($validated);
+        $post->tags()->sync($request->input('tags', []));
 
         session()->flash('success', '投稿を更新しました。');
 

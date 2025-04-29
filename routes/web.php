@@ -18,5 +18,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('posts.comments', App\Http\Controllers\CommentController::class);
+Route::resource('tags', App\Http\Controllers\TagController::class);
 
 require __DIR__.'/auth.php';

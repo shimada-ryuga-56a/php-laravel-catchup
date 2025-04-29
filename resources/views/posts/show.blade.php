@@ -17,4 +17,41 @@
   <button type="submit">削除する</button>
 </form>
 
+<h2>コメント</h2>
+<ul>
+  @forelse($post->comments as $comment)
+  <li>
+    {{$comment->body}}
+    <small>
+      {{$comment->created_at->format('Y-m-d H:i')}}
+    </small>
+    <button><a href="{{route('posts.comments.edit', [$post, $comment])}}">編集する</a></button>
+    <form action="{{route('posts.comments.destroy', [$post, $comment])}}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+      @csrf @method('DELETE')
+      <button>削除する</button>
+    </form>
+  </li>
+  @empty
+  <li>
+    まだコメントはありません。
+  </li>
+  @endforelse
+</ul>
+
+<h3>
+  コメントを追加
+</h3>
+@if ($errors->has('body'))
+  <div style="color:red";>
+    {{$errors->first('body')}}
+  </div>
+@endif
+
+<form action="{{route('posts.comments.store', $post)}}" method="POST">
+  @csrf
+  <textarea name="body" row="3">{{old('body')}}</textarea>
+  <br>
+  <button type="submit">投稿する</button>
+</form>
+
 @endsection
