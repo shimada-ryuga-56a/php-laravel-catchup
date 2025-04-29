@@ -27,6 +27,16 @@
       <label for="content">本文</label>
       <textarea name="content">{{old('content', $post->content)}}</textarea>
     </div>
+    <div>
+      <select name="tags[]" multiple>
+        @foreach ($tags as $tag)
+          <option value="{{$tag->id}}">
+            {{ in_array($tag->id, old('tags', $post->tags->pluck('id')->toArray())) ? 'selected' : '' }}>
+            {{$tag->name}}
+          </option>
+        @endforeach
+      </select>
+    </div>
     <button type="submit">
       更新する
     </button>
