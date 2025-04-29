@@ -34,15 +34,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $validated = $request-> validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'tags'    => 'array',
-            'tags.*' => 'exists:tags,id',
-        ]);
-
-        $post = Post::create($validated);
-
+        $post = Post::create($request->validated());
         $post->tags()->attach($request->input('tags', []));
 
         session()->flash("success", "投稿が作成されました。");
@@ -72,14 +64,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $validated = $request-> validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'tags' => 'array',
-            'tags.*' => 'exists:tags,id',
-        ]);
-
-        $post->update($validated);
+        $post->update($request->validated());
         $post->tags()->sync($request->input('tags', []));
 
         session()->flash('success', '投稿を更新しました。');
