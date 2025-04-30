@@ -6,8 +6,12 @@
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
-  <body class="font-heading bg-brand-light">
-    @include('partials.flash')
-    @yield('content')
+  <body class="font-body bg-brand-light min-h-screen flex flex-col">
+    <x-nav/>
+
+    <main class="container mx-auto flex-grow py-8">
+      @include('partials.flash')
+      @yield('content')
+    </main>
   </body>
 </html>
