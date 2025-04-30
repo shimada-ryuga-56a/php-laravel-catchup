@@ -11,8 +11,16 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                brand: {
+                    light: '#3ab7bf',
+                    DEFAULT: '#0fa9b1',
+                    dark: '#0c7c85',
+                }
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                heading: ['"Noto Sans JP"', 'sans-serif'],
+                body: ['"Roboto"', 'sans-serif'],
             },
         },
     },
