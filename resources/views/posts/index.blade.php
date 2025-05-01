@@ -12,6 +12,9 @@
   @forelse ($posts as $post)
     <x-card :title="$post->title">
       <p class="mb-4">{{ Str::limit($post->content, 100) }}</p>
+      <x-button as="a" href="{{ route('posts.show', $post) }}">
+        詳細を見る
+      </x-button>
     </x-card>
   @empty
     <p>投稿がありません。</p>
